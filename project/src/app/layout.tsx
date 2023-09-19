@@ -1,3 +1,8 @@
+import Header from '@/components/Header';
+
+import './globals.css';
+import Providers from '@/components/auth/Providers';
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
