@@ -7,7 +7,7 @@ export default function Avatar() {
   const { data: session } = useSession();
 
   return (
-    <div className="justify-self-end">
+    <div className="">
       {session ? (
         <div>{session?.user?.name}</div>
       ) : (

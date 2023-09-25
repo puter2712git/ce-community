@@ -16,8 +16,5 @@ export async function POST(req: Request) {
     values: [body.name, body.email, hashedPassword],
   });
 
-  console.log(body);
-  console.log(res);
-
   return Response.json(res);
 }

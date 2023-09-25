@@ -1,4 +1,5 @@
 import { executeQuery } from '@/lib/db';
+import { signJwtAccessToken } from '@/lib/jwt';
 import * as bcrypt from 'bcrypt';
 
 interface RequestBody {
@@ -14,10 +15,16 @@ export async function POST(req: Request) {
     values: [body.email],
   });
 
-  console.log(user);
-
   if (user.length && (await bcrypt.compare(body.password, user[0].password))) {
-    return Response.json(user[0]);
+    const { password, ...userWithoutPass } = user[0];
+
+    const accessToken = signJwtAccessToken(userWithoutPass);
+    const result = {
+      ...userWithoutPass,
+      accessToken,
+    };
+
+    return Response.json(result);
   }
   return Response.json(null);
 }

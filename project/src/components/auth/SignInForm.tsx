@@ -9,8 +9,6 @@ export default function SignInForm() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(email, password);
-
     const res = await signIn('credentials', {
       email: email,
       password: password,
