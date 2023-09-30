@@ -1,7 +1,6 @@
-import Header from '@/components/header/Header';
-
+import Providers from '@/lib/Providers';
+import Header from '@/components/templates/header/Header';
 import './globals.css';
-import Providers from '@/components/auth/Providers';
 
 export default function RootLayout({
   children,
