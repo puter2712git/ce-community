@@ -6,22 +6,32 @@ html {
   font-size: 10px;
 }
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+} */
+
+@layer base {
+  :root {
+    --color-primary: 0 128 255;
+    --color-secondary: 88 88 88;
+    --color-neutral: 'white';
+  }
+
+  input {
+    outline: none;
+  }
 }
 
 @layer components {
   .btn {
-    @apply flex justify-center items-center rounded-lg px-2 py-1;
+    @apply flex justify-center items-center rounded-lg px-3 py-2;
+  }
+  .input {
+    @apply flex justify-start items-center px-2 py-1 border-solid border-b;
   }
 }

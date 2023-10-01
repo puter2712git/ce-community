@@ -29,6 +29,8 @@ const handler = NextAuth({
         );
         const user = await res.json();
 
+        console.log(user);
+
         if (user) {
           return user;
         } else {

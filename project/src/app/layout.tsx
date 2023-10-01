@@ -1,5 +1,5 @@
 import Providers from '@/lib/Providers';
-import Header from '@/components/templates/header/Header';
+import Header from '@/components/templates/header';
 import './globals.css';
 
 export default function RootLayout({

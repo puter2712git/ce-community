@@ -13,12 +13,13 @@ export default function UserToolbar() {
 
   return session ? (
     <Button
-      props={{
-        isOutline: false,
-        color: 'secondary',
-        size: 'sm',
+      attrs={{
+        onClick: () => signOut(),
       }}
-      onClick={() => signOut()}
+      type="primary"
+      outline={false}
+      text={true}
+      fontSize="medium"
     >
       로그아웃
     </Button>
@@ -26,13 +27,7 @@ export default function UserToolbar() {
     <ul className="flex flex-row gap-3 justify-center items-center">
       <li>
         <Link href="/sign-in">
-          <Button
-            props={{
-              isOutline: false,
-              color: 'primary',
-              size: 'sm',
-            }}
-          >
+          <Button type="primary" outline={false} text={true} fontSize="medium">
             로그인
           </Button>
         </Link>
@@ -40,11 +35,10 @@ export default function UserToolbar() {
       <li>
         <Link href="/sign-up">
           <Button
-            props={{
-              isOutline: false,
-              color: 'secondary',
-              size: 'sm',
-            }}
+            type="secondary"
+            outline={false}
+            text={true}
+            fontSize="medium"
           >
             회원가입
           </Button>
