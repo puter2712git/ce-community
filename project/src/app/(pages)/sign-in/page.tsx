@@ -1,5 +1,5 @@
-import SignInFormTemplate from '@/components/templates/sign-in-form';
+import SignIn from '@/components/templates/sign-in';
 
 export default function SignUpPage() {
-  return <SignInFormTemplate />;
+  return <SignIn />;
 }

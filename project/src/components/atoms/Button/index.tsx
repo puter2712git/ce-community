@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type ButtonType = 'primary' | 'secondary' | 'neutral';
+type ButtonVariant = 'primary' | 'secondary' | 'neutral';
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
-  attrs?: React.ButtonHTMLAttributes<HTMLButtonElement>;
-  type?: ButtonType;
+  variant?: ButtonVariant;
   outline?: boolean;
   text?: boolean;
   fontSize?: FontSizeType;
@@ -43,20 +42,32 @@ const buttonConfig = {
 };
 
 export default function Button(props: ButtonProps) {
+  const {
+    children,
+    variant = 'neutral',
+    outline = false,
+    text = false,
+    fontSize = 'medium',
+    className = '',
+    ...restProps
+  } = props;
+
   const styles = twMerge(`btn
-	${buttonConfig[props.type || 'neutral'].bgColor}
-	${buttonConfig[props.type || 'neutral'].color}
-	${props.outline ? buttonConfig[props.type || 'neutral'].outline : null}
-	${props.text ? buttonConfig[props.type || 'neutral'].text : null}
+	${buttonConfig[variant].bgColor}
+	${buttonConfig[variant].color}
+	${buttonConfig[fontSize]}
+	${props.outline ? buttonConfig[variant].outline : ''}
+	${props.text ? buttonConfig[variant].text : ''}
+	${className}
   `);
 
   return (
     <button
-      {...props.attrs}
-      className={`${styles} ${buttonConfig[props.fontSize || 'medium']}
+      {...restProps}
+      className={`${styles}
 	`}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

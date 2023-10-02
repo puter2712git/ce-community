@@ -23,35 +23,25 @@ export default function SignInForm() {
     >
       <div className="flex justify-around items-center gap-10 w-9/12">
         <Input
-          attrs={{
-            id: 'email',
-            type: 'email',
-            placeholder: 'example@ajou.ac.kr',
-            ...register('email'),
-          }}
-          type="primary"
+          id="email"
+          type="email"
+          placeholder="example@ajou.ac.kr"
+          {...register('email')}
+          variant="primary"
           fontSize="xlarge"
         />
       </div>
       <div className="flex justify-around items-center gap-10 w-full">
         <Input
-          attrs={{
-            id: 'password',
-            type: 'password',
-            placeholder: '***********',
-            ...register('password'),
-          }}
-          type="primary"
+          id="password"
+          type="password"
+          placeholder="***********"
+          {...register('password')}
+          variant="primary"
           fontSize="xlarge"
         />
       </div>
-      <Button
-        attrs={{
-          type: 'submit',
-        }}
-        type="primary"
-        fontSize="large"
-      >
+      <Button type="submit" variant="primary" fontSize="large">
         로그인
       </Button>
     </form>

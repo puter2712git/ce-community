@@ -34,4 +34,7 @@ html {
   .input {
     @apply flex justify-start items-center px-2 py-1 border-solid border-b;
   }
+  .board-row {
+    @apply text-m border-b border-solid border-gray-300 last:border-none;
+  }
 }

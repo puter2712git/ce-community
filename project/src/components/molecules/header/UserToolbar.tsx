@@ -13,10 +13,8 @@ export default function UserToolbar() {
 
   return session ? (
     <Button
-      attrs={{
-        onClick: () => signOut(),
-      }}
-      type="primary"
+      onClick={() => signOut()}
+      variant="primary"
       outline={false}
       text={true}
       fontSize="medium"
@@ -27,7 +25,12 @@ export default function UserToolbar() {
     <ul className="flex flex-row gap-3 justify-center items-center">
       <li>
         <Link href="/sign-in">
-          <Button type="primary" outline={false} text={true} fontSize="medium">
+          <Button
+            variant="primary"
+            outline={false}
+            text={true}
+            fontSize="medium"
+          >
             로그인
           </Button>
         </Link>
@@ -35,7 +38,7 @@ export default function UserToolbar() {
       <li>
         <Link href="/sign-up">
           <Button
-            type="secondary"
+            variant="secondary"
             outline={false}
             text={true}
             fontSize="medium"

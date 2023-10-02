@@ -1,11 +1,11 @@
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type InputType = 'primary' | 'secondary' | 'neutral';
+type InputVariant = 'primary' | 'secondary' | 'neutral';
 
-export interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode;
-  attrs?: React.InputHTMLAttributes<HTMLInputElement>;
-  type?: InputType;
+  variant?: InputVariant;
   outline?: boolean;
   fontSize?: FontSizeType;
   block?: boolean;
@@ -15,15 +15,15 @@ const inputConfig = {
   // Input types
   primary: {
     color: 'border-b-primary',
-    outline: 'border border-primary rounded-lg',
+    outline: 'border border-primary',
   },
   secondary: {
     color: 'border-b-secondary',
-    outline: 'border border-secondary rounded-lg',
+    outline: 'border border-secondary',
   },
   neutral: {
     color: 'border-b-neutral',
-    outline: 'border border-neutral rounded-lg',
+    outline: 'border border-neutral',
   },
 
   // Font sizes
@@ -35,20 +35,32 @@ const inputConfig = {
   xxlarge: 'text-xxlg',
 };
 
-export default function Input(props: InputProps) {
-  const styles = twMerge(`input
-		${inputConfig[props.type || 'neutral'].color}
-		${props.outline ? inputConfig[props.type || 'neutral'].outline : null}
-	`);
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (props: InputProps, ref) => {
+    const {
+      children,
+      variant = 'neutral',
+      outline = false,
+      fontSize = 'medium',
+      block = false,
+      className = '',
+      ...restProps
+    } = props;
 
-  return (
-    <input
-      {...props.attrs}
-      className={`${styles} ${inputConfig[props.fontSize || 'medium']} ${
-        props.block && 'block'
-      }`}
-    >
-      {props.children}
-    </input>
-  );
-}
+    const styles = twMerge(`input
+		${inputConfig[variant].color}
+		${outline ? inputConfig[variant].outline : ''}
+		${inputConfig[fontSize]}
+		${block ? 'block' : ''}
+		${className}
+	  `);
+
+    return (
+      <input {...restProps} ref={ref} className={`${styles}`}>
+        {children}
+      </input>
+    );
+  },
+);
+
+export default Input;

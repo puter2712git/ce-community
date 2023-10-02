@@ -1,9 +1,22 @@
 import { executeQuery } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
+export interface PostData {
+  id: number;
+  title: string;
+  date: string;
+  user_id: string;
+  author: string;
+}
+
+export interface UserData {
+  id: number;
+  name: string;
+}
+
 export async function GET(req: NextRequest) {
   const result = await executeQuery({
-    query: 'SELECT * FROM post',
+    query: `SELECT id, title, date, user_id FROM post`,
     values: [],
   });
 

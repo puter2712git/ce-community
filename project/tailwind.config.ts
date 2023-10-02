@@ -16,9 +16,9 @@ const config: Config = {
       fontSize: {
         xs: '0.5rem',
         s: '0.75rem',
-        m: '1rem',
-        lg: '1.25rem',
-        xlg: '1.5rem',
+        m: '1.25rem',
+        lg: '1.5rem',
+        xlg: '1.75rem',
         xxlg: '2rem',
       },
       backgroundImage: {
