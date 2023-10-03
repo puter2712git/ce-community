@@ -1,9 +1,11 @@
 import { PostData, UserData } from '@/app/api/posts/route';
 import PostRow from '@/components/molecules/post-row';
+import { Suspense } from 'react';
 
 export default async function PostTable() {
   const postsRes = await fetch('http://localhost:3000/api/posts', {
     method: 'GET',
+    cache: 'no-store',
   });
   const postsData: PostData[] = await postsRes.json();
 

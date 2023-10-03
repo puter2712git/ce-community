@@ -20,7 +20,7 @@ export default function PostPage() {
       method: 'POST',
       body: JSON.stringify({ title, content, id }),
     }).then((res) => {
-      router.push('/board');
+      router.push('/posts');
     });
   }
 

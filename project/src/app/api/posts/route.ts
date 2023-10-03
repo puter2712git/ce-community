@@ -16,7 +16,7 @@ export interface UserData {
 
 export async function GET(req: NextRequest) {
   const result = await executeQuery({
-    query: `SELECT id, title, date, user_id FROM post`,
+    query: `SELECT id, title, date, user_id FROM post ORDER BY id DESC LIMIT 15`,
     values: [],
   });
 
