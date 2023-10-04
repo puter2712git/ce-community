@@ -1,7 +1,7 @@
 import { executeQuery } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
-export interface PostData {
+export interface IPost {
   id: number;
   title: string;
   date: string;

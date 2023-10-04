@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.7",
+    "@tanstack/react-query-devtools": "^4.35.7",
     "@types/next-auth": "^3.15.0",
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",
