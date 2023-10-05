@@ -1,4 +1,4 @@
-import Button from '@/components/atoms/Button';
+import Button from '@/components/atoms/button';
 import Link from 'next/link';
 
 export default function Title() {

@@ -14,17 +14,7 @@ export default async function PostTable() {
       .toString()
       .padStart(2, '0')}.${formattedDate.getDate().toString().padStart(2, '0')}
 	`;
-
-    const userRes = await fetch('http://localhost:3000/api/posts', {
-      method: 'POST',
-      body: JSON.stringify({ id: row.user_id }),
-    });
-    const userData: UserData[] = await userRes.json();
-
-    row.author = userData[0].name;
   });
-
-  await Promise.all(fetchUserPromises);
 
   return (
     <table className="w-full">
@@ -42,7 +32,7 @@ export default async function PostTable() {
             post_id={row.id}
             title={row.title}
             date={row.date}
-            author={row.author}
+            user_id={Number(row.user_id)}
           />
         ))}
       </tbody>
