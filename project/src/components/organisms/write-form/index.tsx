@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '@/components/atoms/button';
-import Input from '@/components/atoms/input';
+import Button from '@/components/atoms/Button';
+import Input from '@/components/atoms/Input';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';

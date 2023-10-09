@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/components/atoms/button';
+import Button from '@/components/atoms/Button';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 

@@ -3,8 +3,8 @@
 import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 
-import Input from '@/components/atoms/input';
-import Button from '@/components/atoms/button';
+import Input from '@/components/atoms/Input';
+import Button from '@/components/atoms/Button';
 
 export default function SignInForm() {
   const { register, handleSubmit } = useForm();

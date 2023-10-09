@@ -3,8 +3,8 @@
 import { useForm, FieldErrors } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
-import Button from '@/components/atoms/button';
-import Input from '@/components/atoms/input';
+import Button from '@/components/atoms/Button';
+import Input from '@/components/atoms/Input';
 
 interface HookFormType {
   name: string;
