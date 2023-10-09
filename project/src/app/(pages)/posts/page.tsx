@@ -15,7 +15,7 @@ export default async function PostsPage({
     <section className="flex flex-col justify-center items-center mt-40 gap-2">
       <PostTableToolbar />
       <article className="w-1/2 border border-solid border-black rounded-xl">
-        <PostTable pageId={Number(searchParams.id)} />
+        {/* <PostTable pageId={Number(searchParams.id)} /> */}
       </article>
       <PostTableButtonList currentPageIndex={Number(searchParams.id)} />
     </section>
