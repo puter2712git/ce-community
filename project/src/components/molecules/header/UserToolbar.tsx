@@ -8,7 +8,7 @@ export default function UserToolbar() {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
-    return null;
+    return <div>Loading...</div>;
   }
 
   return session ? (

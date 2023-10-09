@@ -55,7 +55,6 @@ export default function Button(props: ButtonProps) {
   const styles = twMerge(`btn
 	${buttonConfig[variant].bgColor}
 	${buttonConfig[variant].color}
-	${buttonConfig[fontSize]}
 	${props.outline ? buttonConfig[variant].outline : ''}
 	${props.text ? buttonConfig[variant].text : ''}
 	${className}
@@ -64,7 +63,7 @@ export default function Button(props: ButtonProps) {
   return (
     <button
       {...restProps}
-      className={`${styles}
+      className={`${styles} ${buttonConfig[fontSize]}
 	`}
     >
       {children}

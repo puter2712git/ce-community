@@ -1,16 +1,9 @@
-import { getPostData } from '@/lib/post';
+import PostContextTemplate from '@/components/templates/each-post';
 
-export default async function PostOfId({
+export default async function PostEachPage({
   params,
 }: {
   params: { post_id: number };
 }) {
-  const postDatas = await getPostData(params.post_id);
-  const postData = postDatas[0];
-
-  return (
-    <div>
-      {postData.title} {postData.content} {postData.date}
-    </div>
-  );
+  return <PostContextTemplate postId={params.post_id} />;
 }
