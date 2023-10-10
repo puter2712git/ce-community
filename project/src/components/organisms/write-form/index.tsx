@@ -4,11 +4,12 @@ import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function WriteForm() {
   const { register, handleSubmit } = useForm();
   const session = useSession();
+  const router = useRouter();
 
   return (
     <form
@@ -23,7 +24,7 @@ export default function WriteForm() {
           }),
         });
 
-        redirect('/posts');
+        router.push('/posts');
       })}
     >
       <Input
