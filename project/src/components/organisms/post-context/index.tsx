@@ -8,6 +8,7 @@ export interface IPostContext {
 
 export default async function PostContext(props: IPostContext) {
   const postData = await getPostData(props.postId);
+  console.log(postData);
 
   return (
     <article className="w-full">

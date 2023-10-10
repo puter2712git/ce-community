@@ -37,7 +37,7 @@ export default async function PostTable(props: IPostTable) {
             post_id={row.id}
             title={row.title}
             date={row.date}
-            author={row.name}
+            author={row.author.name}
           />
         ))}
       </tbody>

@@ -5,8 +5,7 @@ export interface IPost {
   id: number;
   title: string;
   date: string;
-  user_id: string;
-  name: string;
+  author: { name: string };
 }
 
 export interface UserData {
@@ -23,7 +22,7 @@ export async function POST(req: NextRequest) {
       id: true,
       title: true,
       date: true,
-      user: {
+      author: {
         select: {
           name: true,
         },

@@ -11,6 +11,8 @@ export default function WriteForm() {
   const session = useSession();
   const router = useRouter();
 
+  console.log(session);
+
   return (
     <form
       className="flex flex-col items-center w-full gap-5"

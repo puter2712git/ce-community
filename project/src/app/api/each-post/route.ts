@@ -5,14 +5,14 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const post = await prisma.post.findUnique({
     where: {
-      id: body.postId,
+      id: Number(body.postId),
     },
     select: {
       id: true,
       title: true,
       date: true,
       content: true,
-      user: {
+      author: {
         select: {
           name: true,
         },
