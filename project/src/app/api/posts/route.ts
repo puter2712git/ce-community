@@ -1,4 +1,4 @@
-import { executeQuery } from '@/lib/db';
+import prisma from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export interface IPost {
@@ -18,15 +18,23 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const startId = (body.pageId - 1) * 15;
 
-  const result = await executeQuery({
-    query: `SELECT p.id, p.title, p.date, u.name 
-	FROM post as p 
-	INNER JOIN user as u ON p.user_id = u.id 
-    ORDER BY id DESC
-	LIMIT ?, 15;
-	`,
-    values: [startId],
+  const posts = await prisma.post.findMany({
+    select: {
+      id: true,
+      title: true,
+      date: true,
+      user: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      id: 'desc',
+    },
+    skip: startId,
+    take: 15,
   });
 
-  return NextResponse.json(result);
+  return NextResponse.json(posts);
 }

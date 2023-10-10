@@ -1,12 +1,19 @@
-import { executeQuery } from '@/lib/db';
+import prisma from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const result = await executeQuery({
-    query: `INSERT INTO post(title, content, date, user_id) VALUES(?, ?, NOW(), ?)`,
-    values: [body.title, body.content, body.userId],
+
+  const post = await prisma.post.create({
+    data: {
+      title: body.title,
+      content: body.content,
+      date: new Date(),
+      user: {
+        connect: { id: body.userId },
+      },
+    },
   });
 
-  return NextResponse.json(result);
+  return NextResponse.json(post);
 }

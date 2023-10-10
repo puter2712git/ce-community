@@ -1,4 +1,4 @@
-import { executeQuery } from '@/lib/db';
+import prisma from '@/lib/db';
 import { signJwtAccessToken } from '@/lib/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -9,10 +9,10 @@ interface RequestBody {
 
 export async function POST(req: Request) {
   const body: RequestBody = await req.json();
-
-  const user: any = await executeQuery({
-    query: `SELECT * FROM user WHERE email = ?`,
-    values: [body.email],
+  const user = await prisma.user.findMany({
+    where: {
+      email: body.email,
+    },
   });
 
   if (user.length && (await bcrypt.compare(body.password, user[0].password))) {
