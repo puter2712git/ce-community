@@ -1,7 +1,14 @@
 'use client';
 
-import { useForm, FieldErrors } from 'react-hook-form';
+import {
+  useForm,
+  FieldErrors,
+  SubmitErrorHandler,
+  FieldError,
+} from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/ReactToastify.css';
 
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
@@ -20,7 +27,14 @@ export default function SignUpForm() {
     setValue,
     formState: { errors },
     setError,
-  } = useForm<HookFormType>();
+  } = useForm<HookFormType>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+    mode: 'onSubmit',
+  });
   const router = useRouter();
 
   async function onValid(data: HookFormType) {
@@ -33,53 +47,74 @@ export default function SignUpForm() {
     });
   }
 
-  function onInvalid(errors: FieldErrors) {}
+  function onInvalid(errors: FieldErrors<HookFormType>) {
+    toast.warn(errors.email?.message);
+    toast.warn(errors.name?.message);
+    toast.warn(errors.password?.message);
+  }
 
   return (
-    <form
-      className="flex flex-col items-center w-full h-auto gap-5"
-      onSubmit={handleSubmit(onValid, onInvalid)}
-    >
-      <Input
-        id="name"
-        type="name"
-        placeholder="John Smith"
-        variant="primary"
-        fontSize="xlarge"
-        {...register('name', {
-          required: true,
-          validate: {
-            isNone: (value) => {
-              console.log(value);
-              return !value.includes('admin') || 'admin is not allowed';
+    <>
+      <form
+        className="flex flex-col items-center w-full h-auto gap-5"
+        onSubmit={handleSubmit(onValid, onInvalid)}
+      >
+        <Input
+          id="name"
+          type="name"
+          placeholder="닉네임"
+          variant="primary"
+          fontSize="xlarge"
+          {...register('name', {
+            required: '닉네임은 필수 항목입니다.',
+            maxLength: {
+              value: 12,
+              message: '닉네임은 12글자 이하여야 합니다.',
             },
-          },
-        })}
+          })}
+        />
+        <Input
+          id="email"
+          placeholder="example@ajou.ac.kr"
+          variant="primary"
+          fontSize="xlarge"
+          {...register('email', {
+            required: '이메일은 필수 항목입니다.',
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+              message: '잘못된 이메일 형식입니다.',
+            },
+          })}
+        />
+        <Input
+          id="password"
+          type="password"
+          placeholder="***********"
+          variant="primary"
+          fontSize="xlarge"
+          {...register('password', {
+            required: '비밀번호는 필수 항목입니다.',
+            minLength: {
+              value: 8,
+              message: '비밀번호는 8자 이상이여야 합니다.',
+            },
+            maxLength: {
+              value: 20,
+              message: '비밀번호는 20자 이하여야 합니다.',
+            },
+          })}
+        />
+        <Button variant="primary" fontSize="large">
+          회원가입
+        </Button>
+      </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        theme="light"
       />
-      <span>{errors.name?.message}</span>
-      <Input
-        id="email"
-        type="email"
-        placeholder="example@ajou.ac.kr"
-        variant="primary"
-        fontSize="xlarge"
-        {...register('email', {
-          required: true,
-        })}
-      />
-      <Input
-        id="password"
-        type="password"
-        placeholder="***********"
-        variant="primary"
-        fontSize="xlarge"
-        {...register('password', {
-          required: true,
-        })}
-      />
-      <Button variant="primary" fontSize="large">
-        회원가입
-      </Button>
-    </form>
+    </>
   );
 }
