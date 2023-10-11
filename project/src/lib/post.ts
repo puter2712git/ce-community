@@ -5,5 +5,5 @@ export async function getPostData(id: number) {
   });
   const data = await res.json();
 
-  return data[0];
+  return data;
 }

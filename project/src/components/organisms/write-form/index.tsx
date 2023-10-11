@@ -11,8 +11,6 @@ export default function WriteForm() {
   const session = useSession();
   const router = useRouter();
 
-  console.log(session);
-
   return (
     <form
       className="flex flex-col items-center w-full gap-5"
@@ -24,9 +22,7 @@ export default function WriteForm() {
             content: data.content,
             userId: session.data?.user.id,
           }),
-        });
-
-        router.push('/posts');
+        }).then((res) => router.push('/posts'));
       })}
     >
       <Input

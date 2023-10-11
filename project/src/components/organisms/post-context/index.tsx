@@ -8,13 +8,19 @@ export interface IPostContext {
 
 export default async function PostContext(props: IPostContext) {
   const postData = await getPostData(props.postId);
-  console.log(postData);
+  const formattedDate = new Date(postData.date);
+  postData.date = `${formattedDate.getFullYear()}.${(
+    formattedDate.getMonth() + 1
+  )
+    .toString()
+    .padStart(2, '0')}.${formattedDate.getDate().toString().padStart(2, '0')}
+  `;
 
   return (
     <article className="w-full">
       <PostTopInfo
         title={postData.title}
-        author={postData.name}
+        author={postData.author.name}
         date={postData.date}
       />
       <PostTableContent content={postData.content} />
