@@ -9,7 +9,9 @@ export default function Navigator() {
   return (
     <nav className="flex flex-row h-full">
       {links.map((link) => (
-        <NavLink key={link.id} href={link.href} children={link.children} />
+        <NavLink key={link.id} href={link.href}>
+          {link.children}
+        </NavLink>
       ))}
     </nav>
   );
