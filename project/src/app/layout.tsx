@@ -1,9 +1,6 @@
-import Header from '@/components/templates/header';
 import '@/app/globals.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Header from '@/components/header/Header';
 import Providers from '@/utils/provider';
-
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,

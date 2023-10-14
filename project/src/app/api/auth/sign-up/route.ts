@@ -2,9 +2,10 @@ import prisma from '@/lib/db';
 import * as bcrypt from 'bcrypt';
 
 interface RequestBody {
-  name: string;
-  email: string;
+  nickname: string;
+  loginId: string;
   password: string;
+  email: string;
 }
 
 export async function POST(req: Request) {
@@ -13,9 +14,10 @@ export async function POST(req: Request) {
 
   const user = await prisma.user.create({
     data: {
-      name: body.name,
-      email: body.email,
+      nickname: body.nickname,
+      loginId: body.loginId,
       password: hashedPassword,
+      email: body.email,
     },
   });
 

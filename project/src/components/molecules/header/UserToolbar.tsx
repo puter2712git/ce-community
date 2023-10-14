@@ -11,6 +11,8 @@ export default function UserToolbar() {
     return <div>Loading...</div>;
   }
 
+  console.log(session);
+
   return session ? (
     <Button
       onClick={() => signOut()}

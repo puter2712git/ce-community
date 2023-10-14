@@ -7,6 +7,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        fade: 'fadeOut 0.5s linear forwards',
+      },
+      keyframes: {
+        fadeOut: {
+          '100%': { opacity: '0.5' },
+        },
+      },
       colors: {
         transparent: 'transparent',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
@@ -25,6 +33,19 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      screens: {
+        sm: '640px',
+        // => @media (min-width: 640px) { ... }
+
+        md: '768px',
+        // => @media (min-width: 768px) { ... }
+
+        lg: '1024px',
+        // => @media (min-width: 1024px) { ... }
+
+        xl: '1280px',
+        // => @media (min-width: 1280px) { ... }
       },
     },
   },
