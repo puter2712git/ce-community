@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       date: true,
       author: {
         select: {
-          name: true,
+          nickname: true,
         },
       },
     },
