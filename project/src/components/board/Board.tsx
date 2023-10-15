@@ -39,7 +39,7 @@ async function BoardDatas() {
 
 export default function Board() {
   return (
-    <table className="w-full table-fixed mt-[80px] border border-primary border-solid">
+    <table className="w-full mt-[80px] border border-primary border-solid">
       <thead>
         <tr className="text-lg border-b border-solid border-gray-300">
           <th className="py-4 w-2/12">작성자</th>

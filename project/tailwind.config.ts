@@ -6,6 +6,13 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    theme: {
+      screens: {
+        sm: { min: '390px', max: '819px' },
+        md: { min: '820px', max: '1023px' },
+        lg: { min: '1080px' },
+      },
+    },
     extend: {
       animation: {
         fade: 'fadeOut 0.5s linear forwards',
@@ -33,19 +40,6 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      screens: {
-        sm: '640px',
-        // => @media (min-width: 640px) { ... }
-
-        md: '768px',
-        // => @media (min-width: 768px) { ... }
-
-        lg: '1024px',
-        // => @media (min-width: 1024px) { ... }
-
-        xl: '1280px',
-        // => @media (min-width: 1280px) { ... }
       },
     },
   },
