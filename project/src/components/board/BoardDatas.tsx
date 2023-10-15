@@ -1,4 +1,4 @@
-import BoardPostRow from './post/BoardPostRow';
+import BoardPostRow from './post-row/BoardPostRow';
 
 interface IBoardData {
   id: number;
