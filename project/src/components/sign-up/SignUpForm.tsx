@@ -52,7 +52,7 @@ export default function SignUpForm() {
     router.push('sign-in');
   }
   function onInvalid(errors: FieldErrors<ISignUpForm>) {
-    toast.warn('해결되지 않은 입력 오류가 존재합니다.');
+    toast.warn('오류가 존재합니다.');
   }
 
   return (

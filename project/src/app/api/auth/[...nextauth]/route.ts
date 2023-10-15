@@ -11,7 +11,7 @@ const handler = NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: {
+        loginId: {
           label: '이메일',
           type: 'text',
           placeholder: 'example@ajou.ac.kr',
@@ -23,16 +23,14 @@ const handler = NextAuth({
           `${process.env.NEXTAUTH_URL}/api/auth/sign-in`,
           {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
             body: JSON.stringify({
-              email: credentials?.email,
+              loginId: credentials?.loginId,
               password: credentials?.password,
             }),
           },
         );
         const user = await res.json();
+        console.log(user);
 
         if (user) {
           return user;
