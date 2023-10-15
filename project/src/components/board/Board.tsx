@@ -8,23 +8,23 @@ interface IBoardData {
 }
 
 async function BoardDatas() {
-  //   const res = await fetch(`${process.env.COMMUNITY_URL}/api/board`, {
-  //     method: 'GET',
-  //     cache: 'no-store',
-  //   });
-  //   const datas: IBoardData[] = await res.json();
+  const res = await fetch(`https://ce-community.vercel.app/api/board`, {
+    method: 'GET',
+    cache: 'no-store',
+  });
+  const datas: IBoardData[] = await res.json();
 
-  //   datas.map(async (row) => {
-  //     const formattedDate = new Date(row.date);
-  //     row.date = `${formattedDate.getFullYear()}.${(formattedDate.getMonth() + 1)
-  //       .toString()
-  //       .padStart(2, '0')}.${formattedDate.getDate().toString().padStart(2, '0')}
-  // 		`;
-  //   });
+  datas.map(async (row) => {
+    const formattedDate = new Date(row.date);
+    row.date = `${formattedDate.getFullYear()}.${(formattedDate.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}.${formattedDate.getDate().toString().padStart(2, '0')}
+		`;
+  });
 
   return (
     <>
-      {/* {datas.map((row) => (
+      {datas.map((row) => (
         <BoardPostRow
           key={row.id}
           postId={row.id}
@@ -32,7 +32,7 @@ async function BoardDatas() {
           title={row.title}
           date={row.date}
         />
-      ))} */}
+      ))}
     </>
   );
 }
