@@ -8,7 +8,7 @@ interface IBoardData {
 }
 
 async function BoardDatas() {
-  const res = await fetch(`https://ce-community.vercel.app/api/board`, {
+  const res = await fetch(`${process.env.COMMUNITY_URL}/api/board`, {
     method: 'GET',
     cache: 'no-store',
   });
