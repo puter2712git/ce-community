@@ -96,12 +96,12 @@ export default function SignUpForm() {
           {...register('loginId', {
             required: '아이디는 필수 항목입니다.',
             minLength: {
-              value: 8,
-              message: '아이디는 8~16자 이내로 입력해야 합니다.',
+              value: 6,
+              message: '아이디는 6~16자 이내로 입력해야 합니다.',
             },
             maxLength: {
               value: 16,
-              message: '아이디는 8~16자 이내로 입력해야 합니다.',
+              message: '아이디는 6~16자 이내로 입력해야 합니다.',
             },
           })}
         />
@@ -123,12 +123,8 @@ export default function SignUpForm() {
           {...register('password', {
             required: '비밀번호는 필수 항목입니다.',
             minLength: {
-              value: 12,
-              message: '비밀번호는 12~16자 이내로 입력해야 합니다.',
-            },
-            maxLength: {
-              value: 16,
-              message: '비밀번호는 12~16자 이내로 입력해야 합니다.',
+              value: 8,
+              message: '비밀번호는 8자 이상 입력해야 합니다.',
             },
           })}
         />

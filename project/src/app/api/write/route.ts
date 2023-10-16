@@ -7,9 +7,8 @@ export async function POST(req: NextRequest) {
     data: {
       title: body.title,
       content: body.content,
-      date: new Date(),
       author: {
-        connect: { id: 1 },
+        connect: { id: body.userId },
       },
     },
   });

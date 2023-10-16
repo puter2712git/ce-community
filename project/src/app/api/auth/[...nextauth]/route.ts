@@ -32,6 +32,10 @@ const handler = NextAuth({
         const user = await res.json();
         console.log(user);
 
+        if (user.status === 401) {
+          return null;
+        }
+
         if (user) {
           return user;
         } else {
