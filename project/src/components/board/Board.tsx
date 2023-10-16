@@ -7,7 +7,7 @@ interface IBoardData {
   author: { nickname: string };
 }
 
-async function BoardDatas() {
+async function getBoardDatas() {
   const res = await fetch(`${process.env.COMMUNITY_URL}/api/board`, {
     method: 'GET',
     cache: 'no-store',
@@ -22,22 +22,12 @@ async function BoardDatas() {
 		`;
   });
 
-  return (
-    <>
-      {datas.map((row) => (
-        <BoardPostRow
-          key={row.id}
-          postId={row.id}
-          author={row.author.nickname}
-          title={row.title}
-          date={row.date}
-        />
-      ))}
-    </>
-  );
+  return datas;
 }
 
-export default function Board() {
+export default async function Board() {
+  const boardDatas = await getBoardDatas();
+
   return (
     <table className="w-full border border-primary border-solid">
       <thead>
@@ -48,7 +38,15 @@ export default function Board() {
         </tr>
       </thead>
       <tbody>
-        <BoardDatas />
+        {boardDatas.map((row) => (
+          <BoardPostRow
+            key={row.id}
+            postId={row.id}
+            author={row.author.nickname}
+            title={row.title}
+            date={row.date}
+          />
+        ))}
       </tbody>
     </table>
   );
