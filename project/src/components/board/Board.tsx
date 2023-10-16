@@ -11,9 +11,6 @@ async function getBoardDatas() {
   const res = await fetch(`${process.env.COMMUNITY_URL}/api/board`, {
     method: 'GET',
     cache: 'no-store',
-    next: {
-      revalidate: 0,
-    },
   });
   const datas: IBoardData[] = await res.json();
 
