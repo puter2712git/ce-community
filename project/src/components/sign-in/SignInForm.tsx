@@ -1,8 +1,7 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
-import { redirect, useRouter } from 'next/navigation';
-import { NextResponse } from 'next/server';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
@@ -49,6 +48,7 @@ export default function SignInForm() {
       setIsLoginFailed(true);
     } else {
       router.push('/');
+      router.refresh();
     }
   }
 
