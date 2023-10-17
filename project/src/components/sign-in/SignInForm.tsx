@@ -1,7 +1,9 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { NextResponse } from 'next/server';
+import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
 interface ISignInForm {
@@ -35,6 +37,7 @@ export default function SignInForm() {
     },
   });
   const router = useRouter();
+  const [isLoginFailed, setIsLoginFailed] = useState(false);
 
   async function onValid(data: ISignInForm) {
     const res = await signIn('credentials', {
@@ -42,6 +45,11 @@ export default function SignInForm() {
       password: data.password,
       redirect: false,
     });
+    if (res?.error) {
+      setIsLoginFailed(true);
+    } else {
+      router.push('/');
+    }
   }
 
   function onInvalid(errors: FieldErrors<ISignInForm>) {}
@@ -77,6 +85,13 @@ export default function SignInForm() {
           {...register('password')}
         />
       </InputFieldWrapper>
+
+      {/* 로그인 오류 메세지 */}
+      {isLoginFailed && (
+        <span className="text-red-600 text-m">
+          아이디 혹은 비밀번호가 일치하지 않습니다.
+        </span>
+      )}
 
       {/* 하단 버튼 */}
       <div className="flex justify-end items-center w-full">

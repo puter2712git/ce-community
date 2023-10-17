@@ -1,7 +1,6 @@
 import prisma from '@/lib/db';
 import { signJwtAccessToken } from '@/lib/jwt';
 import * as bcrypt from 'bcrypt';
-import { NextResponse } from 'next/server';
 
 interface RequestBody {
   loginId: string;
@@ -17,17 +16,13 @@ export async function POST(req: Request) {
   });
 
   if (!user.length) {
-    return NextResponse.json({
-      status: 401,
-    });
+    throw new Error('아이디 또는 비밀번호가 일치하지 않습니다.');
   }
 
   const isPasswordMatch = await bcrypt.compare(body.password, user[0].password);
 
   if (!isPasswordMatch) {
-    return NextResponse.json({
-      status: 401,
-    });
+    throw new Error('아이디 또는 비밀번호가 일치하지 않습니다.');
   }
 
   if (user.length && isPasswordMatch) {

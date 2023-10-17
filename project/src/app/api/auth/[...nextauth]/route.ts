@@ -1,8 +1,10 @@
+import { AuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
+import { NextResponse } from 'next/server';
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
@@ -29,18 +31,13 @@ const handler = NextAuth({
             }),
           },
         );
+
+        if (!res.ok) {
+          throw new Error('아이디 또는 비밀번호가 일치하지 않습니다.');
+        }
+
         const user = await res.json();
-        console.log(user);
-
-        if (user.status === 401) {
-          return null;
-        }
-
-        if (user) {
-          return user;
-        } else {
-          return null;
-        }
+        return user;
       },
     }),
   ],
@@ -59,6 +56,8 @@ const handler = NextAuth({
   pages: {
     signIn: '/sign-in',
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
