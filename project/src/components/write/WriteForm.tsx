@@ -38,7 +38,8 @@ export default function WriteForm() {
       method: 'POST',
       body: JSON.stringify({ ...data, userId: user.data?.id }),
     });
-    router.push('board');
+    router.push('/board');
+    router.refresh();
   }
   function onInvalid(errors: FieldErrors<IWriteForm>) {}
 
