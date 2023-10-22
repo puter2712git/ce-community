@@ -1,5 +1,5 @@
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  matcher: ['/write/:path*'],
+  matcher: ['/avatar/:path*', '/write/:path*'],
 };

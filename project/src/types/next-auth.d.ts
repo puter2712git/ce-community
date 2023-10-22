@@ -5,6 +5,7 @@ declare module 'next-auth' {
     user: {
       id: number;
       nickname: string;
+      loginId: string;
       email: string;
       accessToken: string;
     };

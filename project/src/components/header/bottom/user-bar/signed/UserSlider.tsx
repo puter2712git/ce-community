@@ -22,7 +22,7 @@ export default function UserSlider() {
         <ul>
           <li>
             <Link
-              href="/avatar"
+              href="/config"
               className="flex justify-center items-center w-full px-3 py-3 text-m border-b border-solid border-gray-300 select-none"
             >
               설정
