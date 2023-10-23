@@ -25,6 +25,7 @@ async function getPost(postId: number) {
   const res = await fetch(`${process.env.COMMUNITY_URL}/api/post`, {
     method: 'POST',
     body: JSON.stringify({ postId: postId }),
+    cache: 'no-store',
   });
   const data = await res.json();
 
