@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
       author: {
         select: {
           nickname: true,
+          loginId: true,
         },
       },
     },

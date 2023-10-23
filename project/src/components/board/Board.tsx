@@ -4,7 +4,7 @@ interface IBoardData {
   id: number;
   title: string;
   date: string;
-  author: { nickname: string };
+  author: { nickname: string; loginId: string };
 }
 
 async function getBoardDatas() {
@@ -42,7 +42,7 @@ export default async function Board() {
           <BoardPostRow
             key={row.id}
             postId={row.id}
-            author={row.author.nickname}
+            author={row.author}
             title={row.title}
             date={row.date}
           />

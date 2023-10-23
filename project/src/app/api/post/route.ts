@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
       author: {
         select: {
           nickname: true,
+          loginId: true,
         },
       },
     },

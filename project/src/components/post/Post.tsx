@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface IPost {
   postId: number;
 }
@@ -8,7 +10,10 @@ interface IPostData {
   date: string;
   content: string;
   like: number;
-  author: { nickname: string };
+  author: {
+    nickname: string;
+    loginId: string;
+  };
 }
 
 async function getPost(postId: number) {
@@ -25,16 +30,26 @@ export default async function Post(props: IPost) {
   const { postId } = props;
   const postData: IPostData = await getPost(postId);
 
+  const date = new Date(postData.date);
+  postData.date = `${date.getFullYear()}.${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
+
   return (
-    <article className="flex flex-col w-full px-[30px] py-[50px] gap-20 border border-solid">
-      <div className="space-y-5">
-        <h1 className="font-extrabold text-xxlg">제목</h1>
-        <div className="w-full text-m px-5 py-5 border border-solid border-primary">
-          {postData.title}
-        </div>
+    <article className="flex flex-col w-full px-[30px] py-[50px] border border-solid">
+      <div className="border-b">
+        <div className="w-full text-xlg font-bold">{postData.title}</div>
       </div>
-      <div className="space-y-5">
-        <h1 className="font-extrabold text-xxlg">내용</h1>
+      <div className="flex justify-between border-b text-lg mt-[10px]">
+        <Link
+          className="text-primary hover:underline"
+          href={`/avatar/${postData.author.loginId}`}
+        >
+          {postData.author.nickname}
+        </Link>
+        <div>{postData.date}</div>
+      </div>
+      <div className="mt-[50px]">
         <div className="w-full min-h-[100px] text-m px-5 py-5 border border-solid border-primary">
           {postData.content}
         </div>
