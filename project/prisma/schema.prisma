@@ -19,11 +19,19 @@ model User {
 }
 
 model Post {
-  id       Int      @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   title    String
   content  String
-  date     DateTime @default(now())
+  date     DateTime  @default(now())
   authorId Int
-  like     Int      @default(0)
-  author   User     @relation(fields: [authorId], references: [id])
+  like     PostLike?
+  author   User      @relation(fields: [authorId], references: [id])
+}
+
+model PostLike {
+  id      Int  @id @default(autoincrement())
+  like    Int  @default(0)
+  dislike Int  @default(0)
+  postId  Int  @unique
+  post    Post @relation(fields: [postId], references: [id])
 }

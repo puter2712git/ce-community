@@ -12,11 +12,17 @@ export async function POST(req: NextRequest) {
       title: true,
       date: true,
       content: true,
-      like: true,
       author: {
         select: {
           nickname: true,
           loginId: true,
+        },
+      },
+      like: {
+        select: {
+          like: true,
+          dislike: true,
+          postId: true,
         },
       },
     },

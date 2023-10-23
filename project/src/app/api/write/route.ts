@@ -10,6 +10,12 @@ export async function POST(req: NextRequest) {
       author: {
         connect: { id: body.userId },
       },
+      like: {
+        create: {
+          like: 0,
+          dislike: 0,
+        },
+      },
     },
   });
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PostLikeBar from './PostLikeBar';
 
 interface IPost {
   postId: number;
@@ -9,7 +10,11 @@ interface IPostData {
   title: string;
   date: string;
   content: string;
-  like: number;
+  like: {
+    like: number;
+    dislike: number;
+    postId: number;
+  };
   author: {
     nickname: string;
     loginId: string;
@@ -40,7 +45,7 @@ export default async function Post(props: IPost) {
       <div className="border-b">
         <div className="w-full text-xlg font-bold">{postData.title}</div>
       </div>
-      <div className="flex justify-between border-b text-lg mt-[10px]">
+      <div className="flex justify-between border-b text-lg mt-[20px]">
         <Link
           className="text-primary hover:underline"
           href={`/avatar/${postData.author.loginId}`}
@@ -54,6 +59,11 @@ export default async function Post(props: IPost) {
           {postData.content}
         </div>
       </div>
+      <PostLikeBar
+        postId={postData.like.postId}
+        like={postData.like.like}
+        dislike={postData.like.dislike}
+      />
     </article>
   );
 }
