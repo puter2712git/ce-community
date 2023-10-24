@@ -3,7 +3,7 @@ import { getFormattedDate } from '@/lib/utils';
 import Link from 'next/link';
 
 export default function BoardPostRow(
-  props: Omit<IPost, 'content' | 'authorId'>,
+  props: Omit<IPost, 'content' | 'authorId' | 'like'>,
 ) {
   const date = getFormattedDate(props.date);
 

@@ -6,7 +6,7 @@ async function getBoardDatas() {
     method: 'GET',
     cache: 'no-store',
   });
-  const datas: Omit<IPost, 'authorId'>[] = await res.json();
+  const datas: IPost[] = await res.json();
 
   return datas;
 }
