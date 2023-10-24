@@ -1,17 +1,12 @@
 'use client';
 
-import getQueryClient from '@/lib/getQueryClient';
+import { IUser } from '@/lib/user/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
-interface IConfigForm {
-  nickname: string;
-  email: string;
-  loginId: string;
-  password: string;
-}
+interface IConfigForm extends Omit<IUser, 'id' | 'posts'> {}
 
 export default function Config() {
   const session = useSession();

@@ -1,16 +1,11 @@
 'use client';
 
 import getQueryClient from '@/lib/getQueryClient';
+import { IPostLike } from '@/lib/post-like/types';
 import { useMutation } from '@tanstack/react-query';
-import { MouseEventHandler, TouchEventHandler, useState } from 'react';
+import { useState } from 'react';
 
-interface IPostLikeBar {
-  postId: number;
-  like: number;
-  dislike: number;
-}
-
-export default function PostLikeBar(props: IPostLikeBar) {
+export default function PostLikeBar(props: Omit<IPostLike, 'id' | 'post'>) {
   const { like, dislike } = props;
 
   const [likeCount, setLikeCount] = useState(like);
@@ -40,26 +35,16 @@ export default function PostLikeBar(props: IPostLikeBar) {
         ]);
         queryClient.setQueryData(['post-like'], newLikeCount);
 
-        console.log(`mutate: ${newLikeCount}`);
-
         return { prevLike };
       },
       onError: (error, newLike, context) => {
-        console.log(`error: ${error} ${newLike} ${context}`);
         if (context?.prevLike) {
           queryClient.setQueryData(['post-like'], context.prevLike);
-          console.warn('Update failed');
         }
       },
-      onSuccess: (like: number) => {
-        console.log(like);
-        if (!isNaN(like)) {
-          console.log('Update successed!');
-        }
-      },
+      onSuccess: (like: number) => {},
       onSettled: () => {
         queryClient.invalidateQueries(['post-like']);
-        console.log(`settle: ${likeCount}`);
       },
     },
   );

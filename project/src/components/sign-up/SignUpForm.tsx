@@ -1,16 +1,13 @@
 'use client';
 
+import { IUser } from '@/lib/user/types';
 import { useRouter } from 'next/navigation';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
 
-interface ISignUpForm {
-  nickname: string;
-  loginId: string;
-  password: string;
+interface ISignUpForm extends Omit<IUser, 'id' | 'posts'> {
   passwordCheck: string;
-  email: string;
 }
 
 function InputFieldWrapper(props: { children: React.ReactNode }) {

@@ -1,14 +1,12 @@
 'use client';
 
+import { IUser } from '@/lib/user/types';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
-interface ISignInForm {
-  loginId: string;
-  password: string;
-}
+interface ISignInForm extends Pick<IUser, 'loginId' | 'password'> {}
 
 function InputFieldWrapper(props: { children: React.ReactNode }) {
   return (

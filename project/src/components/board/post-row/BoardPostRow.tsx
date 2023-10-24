@@ -1,16 +1,12 @@
+import { IPost } from '@/lib/post/types';
+import { getFormattedDate } from '@/lib/utils';
 import Link from 'next/link';
 
-interface IBoardPostRow {
-  postId: number;
-  author: {
-    nickname: string;
-    loginId: string;
-  };
-  title: string;
-  date: string;
-}
+export default function BoardPostRow(
+  props: Omit<IPost, 'content' | 'authorId'>,
+) {
+  const date = getFormattedDate(props.date);
 
-export default function BoardPostRow(props: IBoardPostRow) {
   return (
     <tr className="board-row">
       <td className="text-center px-2">
@@ -22,11 +18,11 @@ export default function BoardPostRow(props: IBoardPostRow) {
         </Link>
       </td>
       <td className="px-5 truncate text-ellipsis">
-        <Link href={`/post/${props.postId}`} className="hover:underline">
+        <Link href={`/post/${props.id}`} className="hover:underline">
           {props.title}
         </Link>
       </td>
-      <td className="text-center py-2 px-2">{props.date}</td>
+      <td className="text-center py-2 px-2">{date}</td>
     </tr>
   );
 }
