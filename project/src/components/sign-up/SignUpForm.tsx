@@ -66,12 +66,16 @@ export default function SignUpForm() {
         </label>
         <input
           id="nickname"
-          placeholder="닉네임: 2~8자"
+          placeholder="닉네임: example"
           className="w-full border border-primary px-[10px] py-[10px] text-m"
           {...register('nickname', {
             required: '닉네임은 필수 항목입니다.',
             minLength: {
               value: 2,
+              message: '닉네임은 2~8자 이내로 입력해야 합니다.',
+            },
+            maxLength: {
+              value: 8,
               message: '닉네임은 2~8자 이내로 입력해야 합니다.',
             },
           })}
@@ -88,17 +92,17 @@ export default function SignUpForm() {
         </label>
         <input
           id="loginId"
-          placeholder="ID: 8~16자"
+          placeholder="ID: example"
           className="w-full border border-primary px-[10px] py-[10px] text-m"
           {...register('loginId', {
             required: '아이디는 필수 항목입니다.',
             minLength: {
-              value: 6,
-              message: '아이디는 6~16자 이내로 입력해야 합니다.',
+              value: 4,
+              message: '아이디는 4~20자 이내로 입력해야 합니다.',
             },
             maxLength: {
-              value: 16,
-              message: '아이디는 6~16자 이내로 입력해야 합니다.',
+              value: 20,
+              message: '아이디는 4~20자 이내로 입력해야 합니다.',
             },
           })}
         />
@@ -115,7 +119,7 @@ export default function SignUpForm() {
         <input
           id="password"
           type="password"
-          placeholder="Password: 12~20자"
+          placeholder="Password: **********"
           className="w-full border border-primary px-[10px] py-[10px] text-m"
           {...register('password', {
             required: '비밀번호는 필수 항목입니다.',
