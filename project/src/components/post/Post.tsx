@@ -19,11 +19,11 @@ export default async function Post({ postId }: { postId: number }) {
   const date = getFormattedDate(postData.date);
 
   return (
-    <article className="flex flex-col w-full px-[30px] py-[50px] border border-solid">
+    <article className="flex w-full flex-col border border-solid px-[30px] py-[50px]">
       <div className="border-b">
         <div className="w-full text-xlg font-bold">{postData.title}</div>
       </div>
-      <div className="flex justify-between border-b text-lg mt-[20px]">
+      <div className="mt-[20px] flex justify-between border-b text-lg">
         <Link
           className="text-primary hover:underline"
           href={`/avatar/${postData.author.loginId}`}
@@ -33,7 +33,7 @@ export default async function Post({ postId }: { postId: number }) {
         <div>{date}</div>
       </div>
       <div className="mt-[50px]">
-        <div className="w-full min-h-[100px] text-m px-5 py-5 border border-solid border-primary">
+        <div className="min-h-[100px] w-full border border-solid border-primary px-5 py-5 text-m">
           {postData.content}
         </div>
       </div>

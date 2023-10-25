@@ -7,7 +7,7 @@ const links: (INavLink & { id: number })[] = [
 
 export default function Navigator() {
   return (
-    <nav className="flex flex-row h-full">
+    <nav className="flex h-full flex-row">
       {links.map((link) => (
         <NavLink key={link.id} href={link.href}>
           {link.children}

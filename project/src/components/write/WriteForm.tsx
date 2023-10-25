@@ -45,41 +45,41 @@ export default function WriteForm() {
 
   return (
     <form
-      className="flex flex-col w-full px-[30px] py-[50px] gap-10 border border-solid"
+      className="flex w-full flex-col gap-10 border border-solid px-[30px] py-[50px]"
       onSubmit={handleSubmit(onValid, onInvalid)}
     >
-      <h1 className="flex justify-center font-extrabold text-xxlg mb-10">
+      <h1 className="mb-10 flex justify-center text-xxlg font-extrabold">
         글쓰기
       </h1>
 
-      <div className="flex flex-col w-full gap-1">
+      <div className="flex w-full flex-col gap-1">
         <input
           placeholder="제목을 입력해 주세요."
-          className="font-bold text-m px-[10px] py-[10px] border border-primary"
+          className="border border-primary px-[10px] py-[10px] text-m font-bold"
           {...register('title', {
             required: '제목을 입력해 주세요.',
           })}
         />
-        <span className="text-red-500 font-bold">{errors.title?.message}</span>
+        <span className="font-bold text-red-500">{errors.title?.message}</span>
       </div>
 
-      <div className="flex flex-col w-full gap-1">
+      <div className="flex w-full flex-col gap-1">
         {' '}
         <textarea
           placeholder="내용을 입력해 주세요."
-          className="font-bold text-m px-[10px] py-[10px] border border-primary resize-none h-[300px] focus:outline-none"
+          className="h-[300px] resize-none border border-primary px-[10px] py-[10px] text-m font-bold focus:outline-none"
           {...register('content', {
             required: '내용을 입력해 주세요.',
           })}
         />
-        <span className="text-red-500 font-bold">
+        <span className="font-bold text-red-500">
           {errors.content?.message}
         </span>
       </div>
 
       <button
         type="submit"
-        className="bg-primary py-[5px] rounded-[30px] text-white text-m"
+        className="rounded-[30px] bg-primary py-[5px] text-m text-white"
       >
         글쓰기
       </button>

@@ -56,14 +56,14 @@ export default function PostLikeBar(props: Omit<IPostLike, 'id' | 'post'>) {
   }
 
   return (
-    <div className="flex justify-center items-center mt-[50px] gap-5">
+    <div className="mt-[50px] flex items-center justify-center gap-5">
       <button
-        className="flex items-center text-m font-bold text-red-400 px-5 py-3 border border-solid border-red-400 rounded-[10px]"
+        className="flex items-center rounded-[10px] border border-solid border-red-400 px-5 py-3 text-m font-bold text-red-400"
         onClick={() => handleLikeButton()}
       >
         {`좋아요 ${likeCount}`}
       </button>
-      <button className="flex items-center text-m font-bold text-blue-400 px-5 py-3 border border-solid border-blue-400 rounded-[10px]">
+      <button className="flex items-center rounded-[10px] border border-solid border-blue-400 px-5 py-3 text-m font-bold text-blue-400">
         {`싫어요 ${dislikeCount}`}
       </button>
     </div>

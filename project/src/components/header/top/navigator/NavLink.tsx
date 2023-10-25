@@ -11,7 +11,7 @@ export default function NavLink(props: INavLink) {
   return (
     <Link
       href={href}
-      className="flex justify-center items-center w-[120px] h-full text-2xl font-thin hover:animate-fade"
+      className="flex h-full w-[120px] items-center justify-center text-2xl font-thin hover:animate-fade"
     >
       {children}
     </Link>

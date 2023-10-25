@@ -4,11 +4,11 @@ import Navigator from './navigator/Navigator';
 
 export default function TopHeader() {
   return (
-    <section className="w-full h-[70px] border-gray-200 border-b border-solid">
-      <div className="flex justify-between items-center w-full h-full">
+    <section className="h-[70px] w-full border-b border-solid border-gray-200">
+      <div className="flex h-full w-full items-center justify-between">
         <Link
           href="/"
-          className="flex justify-center items-center w-[180px] h-full text-3xl font-extrabold"
+          className="flex h-full w-[180px] items-center justify-center text-3xl font-extrabold"
         >
           Community
         </Link>

@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function BoardToolbar() {
   return (
-    <section className="flex justify-between items-center w-full">
+    <section className="flex w-full items-center justify-between">
       <Link
         href="/write"
-        className="px-3 py-2 border border-secondary border-solid rounded-[5px] text-m"
+        className="rounded-[5px] border border-solid border-secondary px-3 py-2 text-m"
       >
         새 글쓰기
       </Link>

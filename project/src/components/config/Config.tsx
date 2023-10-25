@@ -70,47 +70,47 @@ export default function Config() {
     <>
       {session.status === 'authenticated' && (
         <form
-          className="flex flex-col px-[30px] py-[50px] border border-solid"
+          className="flex flex-col border border-solid px-[30px] py-[50px]"
           onSubmit={handleSubmit(onValid, onInvalid)}
         >
-          <div className="flex flex-col w-full gap-10">
-            <div className="flex justify-between items-center space-x-10">
+          <div className="flex w-full flex-col gap-10">
+            <div className="flex items-center justify-between space-x-10">
               <label className="text-m font-bold">닉네임</label>
               <input
-                className="w-1/2 font-bold text-m px-[10px] py-[10px] border border-primary"
+                className="w-1/2 border border-primary px-[10px] py-[10px] text-m font-bold"
                 {...register('nickname')}
               />
             </div>
-            <div className="flex justify-between items-center space-x-10">
+            <div className="flex items-center justify-between space-x-10">
               <label className="text-m font-bold">아이디</label>
               <input
-                className="w-1/2 font-bold text-m px-[10px] py-[10px] border border-primary hover:cursor-not-allowed"
+                className="w-1/2 border border-primary px-[10px] py-[10px] text-m font-bold hover:cursor-not-allowed"
                 disabled
                 {...register('loginId')}
               />
             </div>
-            <div className="flex justify-between items-center space-x-10">
+            <div className="flex items-center justify-between space-x-10">
               <label className="text-m font-bold">이메일</label>
               <input
-                className="w-1/2 font-bold text-m px-[10px] py-[10px] border border-primary"
+                className="w-1/2 border border-primary px-[10px] py-[10px] text-m font-bold"
                 {...register('email')}
               />
             </div>
-            <div className="flex justify-between items-center space-x-10">
+            <div className="flex items-center justify-between space-x-10">
               <label className="text-m font-bold">비밀번호 확인</label>
               <input
                 type="password"
-                className="w-1/2 font-bold text-m px-[10px] py-[10px] border border-primary"
+                className="w-1/2 border border-primary px-[10px] py-[10px] text-m font-bold"
                 {...register('password')}
               />
             </div>
             <button
               type="submit"
-              className="w-full font-bold text-m py-[5px] bg-primary text-white rounded-[10px]"
+              className="w-full rounded-[10px] bg-primary py-[5px] text-m font-bold text-white"
             >
               수정
             </button>
-            <span className="text-red-600 text-m">{errorMsg}</span>
+            <span className="text-m text-red-600">{errorMsg}</span>
           </div>
         </form>
       )}

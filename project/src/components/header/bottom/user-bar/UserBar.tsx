@@ -7,7 +7,7 @@ export default async function UserBar() {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="flex justify-end items-center h-full px-[20px]">
+    <div className="flex h-full items-center justify-end px-[20px]">
       {session?.user ? <UserSlider /> : <UnsignedUserBar />}
     </div>
   );

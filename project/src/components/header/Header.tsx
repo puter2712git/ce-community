@@ -3,7 +3,7 @@ import TopHeader from './top/TopHeader';
 
 export default function Header() {
   return (
-    <header className="flex justify-center sticky w-full h-auto">
+    <header className="sticky flex h-auto w-full justify-center">
       <div className="w-11/12 max-w-[1300px]">
         <TopHeader />
         <BottomHeader />
