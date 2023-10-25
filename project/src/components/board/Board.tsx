@@ -18,9 +18,9 @@ export default async function Board() {
     <table className="w-full border border-primary border-solid">
       <thead>
         <tr className="text-lg border-b border-solid border-gray-300">
-          <th className="py-4 w-2/12">작성자</th>
-          <th className="w-8/12">제목</th>
-          <th className="w-2/12">날짜</th>
+          <th className="py-4 w-3/12">작성자</th>
+          <th className="w-6/12">제목</th>
+          <th className="w-3/12">날짜</th>
         </tr>
       </thead>
       <tbody>
