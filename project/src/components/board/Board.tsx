@@ -1,7 +1,11 @@
 import { IPost } from '@/lib/post/types';
 import BoardPostRow from './post-row/BoardPostRow';
 
-async function getBoardDatas() {
+interface IBoard {
+  searchParams: string;
+}
+
+async function getBoardDatas(searchParams: string) {
   const res = await fetch(`${process.env.COMMUNITY_URL}/api/board`, {
     method: 'GET',
     cache: 'no-store',
@@ -11,8 +15,8 @@ async function getBoardDatas() {
   return datas;
 }
 
-export default async function Board() {
-  const boardDatas = await getBoardDatas();
+export default async function Board(props: IBoard) {
+  const boardDatas = await getBoardDatas(props.searchParams);
 
   return (
     <table className="w-full border border-solid border-primary">

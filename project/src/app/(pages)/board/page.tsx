@@ -6,12 +6,16 @@ export const metadata: Metadata = {
   title: 'Board',
 };
 
-export default function BoardPage() {
+export default function BoardPage({
+  searchParams,
+}: {
+  searchParams: { [search: string]: string };
+}) {
   return (
     <div className="mt-[80px] flex w-full justify-center">
       <div className="w-[90%] max-w-[800px] space-y-3 sm:w-1/2">
         <BoardToolbar />
-        <Board />
+        <Board search={searchParams.search} />
       </div>
     </div>
   );

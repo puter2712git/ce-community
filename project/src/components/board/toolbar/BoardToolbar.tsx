@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import BoardSearchbar from './BoardSearchbar';
 
 export default function BoardToolbar() {
   return (
@@ -9,6 +10,7 @@ export default function BoardToolbar() {
       >
         새 글쓰기
       </Link>
+      <BoardSearchbar />
     </section>
   );
 }
