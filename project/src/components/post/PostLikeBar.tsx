@@ -2,7 +2,7 @@
 
 import { IPostLike } from '@/lib/post-like/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -11,7 +11,6 @@ export default function PostLikeBar(
 ) {
   const { postId } = props;
 
-  const session = useSession();
   const router = useRouter();
 
   const [likeCount, setLikeCount] = useState<number>(0);
@@ -28,16 +27,19 @@ export default function PostLikeBar(
 
       return body;
     },
+    cacheTime: 0,
     staleTime: 0,
   });
 
   const queryClient = useQueryClient();
   const likeMutation = useMutation({
     mutationFn: async (updatedLikeCount: number) => {
+      const session = await getSession();
+
       const result = await fetch(`/api/post/like/${postId}`, {
         method: 'POST',
         body: JSON.stringify({
-          userId: session.data?.user.id,
+          userId: session?.user.id,
           like: updatedLikeCount,
         }),
       });
@@ -58,22 +60,31 @@ export default function PostLikeBar(
     },
   });
 
-  function handleLikeButton() {
+  async function handleLikeButton() {
+    const session = await getSession();
+
+    if (!session) {
+      alert('로그인 후 좋아요를 누르실 수 있습니다.');
+      router.push('/sign-in');
+      return;
+    }
+
+    if (likedUserIds.includes(session.user.id)) {
+      alert('이미 좋아요를 누른 게시글입니다.');
+      return;
+    }
+
     const newLike = likeCount + 1;
     setLikeCount(newLike);
-    setLikedUserIds([...likedUserIds, session.data!.user.id]);
+    setLikedUserIds([...likedUserIds, session!.user.id]);
     likeMutation.mutate(newLike);
   }
 
   return (
     <div className="mt-[50px] flex items-center justify-center gap-5">
-      {(session.status === 'loading' && postLikeQuery.isFetching) || (
+      {postLikeQuery.isFetching || (
         <button
           className="flex items-center rounded-[10px] border border-solid border-red-400 px-5 py-3 text-m font-bold text-red-400"
-          disabled={
-            session.status === 'unauthenticated' ||
-            likedUserIds.includes(session.data!.user.id)
-          }
           onClick={() => handleLikeButton()}
         >
           {`좋아요 ${likeCount}`}

@@ -38,9 +38,7 @@ export default async function Post({ postId }: { postId: number }) {
           {postData.content}
         </div>
       </div>
-      <Suspense>
-        <PostLikeBar postId={postData.id} />
-      </Suspense>
+      <PostLikeBar postId={postData.id} />
     </article>
   );
 }
