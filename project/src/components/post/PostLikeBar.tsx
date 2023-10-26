@@ -1,71 +1,84 @@
 'use client';
 
-import getQueryClient from '@/lib/getQueryClient';
 import { IPostLike } from '@/lib/post-like/types';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function PostLikeBar(props: Omit<IPostLike, 'id' | 'post'>) {
-  const { like, dislike } = props;
+export default function PostLikeBar(
+  props: Omit<IPostLike, 'id' | 'like' | 'post' | 'users'>,
+) {
+  const { postId } = props;
 
-  const [likeCount, setLikeCount] = useState(like);
-  const [dislikeCount, setDislikeCount] = useState(dislike);
+  const session = useSession();
+  const router = useRouter();
 
-  const queryClient = getQueryClient();
+  const [likeCount, setLikeCount] = useState<number>(0);
+  const [likedUserIds, setLikedUserIds] = useState<number[]>([]);
 
-  const { mutate: updateLikeMutate } = useMutation(
-    async (newLikeCount: number) => {
-      const res = await fetch('/api/post/like', {
+  const postLikeQuery = useQuery({
+    queryKey: ['get-post-like', postId],
+    queryFn: async () => {
+      const result = await fetch(`/api/post/like/${postId}`);
+      const body: Omit<IPostLike, 'id' | 'post'> = await result.json();
+
+      setLikeCount(body.like);
+      setLikedUserIds(body.users.map((user) => user.id));
+
+      return body;
+    },
+    staleTime: 0,
+  });
+
+  const queryClient = useQueryClient();
+  const likeMutation = useMutation({
+    mutationFn: async (updatedLikeCount: number) => {
+      const result = await fetch(`/api/post/like/${postId}`, {
         method: 'POST',
         body: JSON.stringify({
-          postId: props.postId,
-          like: newLikeCount,
-          dislike: dislikeCount,
+          userId: session.data?.user.id,
+          like: updatedLikeCount,
         }),
       });
-      const data = await res.json();
-      return data;
     },
-    {
-      onMutate: async (newLikeCount: number) => {
-        queryClient.cancelQueries(['post-like']);
+    onMutate: async (updatedLikeCount) => {
+      await queryClient.cancelQueries({ queryKey: ['post-like'] });
 
-        const prevLike: number | undefined = queryClient.getQueryData([
-          'post-like',
-        ]);
-        queryClient.setQueryData(['post-like'], newLikeCount);
+      const prevPostLikeCount = queryClient.getQueryData(['post-like']);
+      queryClient.setQueryData(['post-like'], updatedLikeCount);
 
-        return { prevLike };
-      },
-      onError: (error, newLike, context) => {
-        if (context?.prevLike) {
-          queryClient.setQueryData(['post-like'], context.prevLike);
-        }
-      },
-      onSuccess: (like: number) => {},
-      onSettled: () => {
-        queryClient.invalidateQueries(['post-like']);
-      },
+      return { prevPostLikeCount, updatedLikeCount };
     },
-  );
+    onError: (err, updatedLikeCount, context) => {
+      queryClient.setQueryData(['post-like'], context?.prevPostLikeCount);
+    },
+    onSettled: (updatedLikeCount) => {
+      queryClient.invalidateQueries({ queryKey: ['post-like'] });
+    },
+  });
 
   function handleLikeButton() {
     const newLike = likeCount + 1;
     setLikeCount(newLike);
-    updateLikeMutate(newLike);
+    setLikedUserIds([...likedUserIds, session.data!.user.id]);
+    likeMutation.mutate(newLike);
   }
 
   return (
     <div className="mt-[50px] flex items-center justify-center gap-5">
-      <button
-        className="flex items-center rounded-[10px] border border-solid border-red-400 px-5 py-3 text-m font-bold text-red-400"
-        onClick={() => handleLikeButton()}
-      >
-        {`좋아요 ${likeCount}`}
-      </button>
-      <button className="flex items-center rounded-[10px] border border-solid border-blue-400 px-5 py-3 text-m font-bold text-blue-400">
-        {`싫어요 ${dislikeCount}`}
-      </button>
+      {(session.status === 'loading' && postLikeQuery.isFetching) || (
+        <button
+          className="flex items-center rounded-[10px] border border-solid border-red-400 px-5 py-3 text-m font-bold text-red-400"
+          disabled={
+            session.status === 'unauthenticated' ||
+            likedUserIds.includes(session.data!.user.id)
+          }
+          onClick={() => handleLikeButton()}
+        >
+          {`좋아요 ${likeCount}`}
+        </button>
+      )}
     </div>
   );
 }

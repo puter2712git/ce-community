@@ -8,5 +8,5 @@ import Home from './page';
 
 it('App Router: ', () => {
   render(<Home />);
-  expect(screen.getByRole('heading')).toHaveTextContent('test');
+  expect(screen.getByRole('heading')).toHaveTextContent('tes');
 });

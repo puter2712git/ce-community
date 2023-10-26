@@ -18,13 +18,6 @@ export async function POST(req: NextRequest) {
           loginId: true,
         },
       },
-      like: {
-        select: {
-          like: true,
-          dislike: true,
-          postId: true,
-        },
-      },
     },
   });
 

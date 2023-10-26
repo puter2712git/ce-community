@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PostLikeBar from './PostLikeBar';
 import { IPost } from '@/lib/post/types';
 import { getFormattedDate } from '@/lib/utils';
+import { Suspense } from 'react';
 
 async function getPost(postId: number) {
   const res = await fetch(`${process.env.COMMUNITY_URL}/api/post`, {
@@ -37,11 +38,9 @@ export default async function Post({ postId }: { postId: number }) {
           {postData.content}
         </div>
       </div>
-      <PostLikeBar
-        postId={postData.like.postId}
-        like={postData.like.like}
-        dislike={postData.like.dislike}
-      />
+      <Suspense>
+        <PostLikeBar postId={postData.id} />
+      </Suspense>
     </article>
   );
 }

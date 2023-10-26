@@ -16,6 +16,7 @@ model User {
   nickname String  @default("")
   email    String  @default("")
   posts    Post[]
+  likedPosts PostLike[]
 }
 
 model Post {
@@ -23,15 +24,15 @@ model Post {
   title    String
   content  String
   date     DateTime  @default(now())
-  authorId Int
   like     PostLike?
-  author   User      @relation(fields: [authorId], references: [id])
+  author   User?      @relation(fields: [authorId], references: [id])
+  authorId Int
 }
 
 model PostLike {
   id      Int  @id @default(autoincrement())
   like    Int  @default(0)
-  dislike Int  @default(0)
-  postId  Int  @unique
   post    Post @relation(fields: [postId], references: [id])
+  postId  Int  @unique
+  users User[]
 }
