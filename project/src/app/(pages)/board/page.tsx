@@ -1,5 +1,10 @@
 import Board from '@/components/board/Board';
 import BoardToolbar from '@/components/board/toolbar/BoardToolbar';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Board',
+};
 
 export default function BoardPage() {
   return (

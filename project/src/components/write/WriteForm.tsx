@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getSession, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
 interface IWriteForm {
@@ -33,11 +34,15 @@ export default function WriteForm() {
     return session?.user;
   });
 
+  const [isUploading, setIsUploading] = useState(false);
+
   async function onValid(data: IWriteForm) {
+    setIsUploading(true);
     const res = await fetch('/api/write', {
       method: 'POST',
       body: JSON.stringify({ ...data, userId: user.data?.id }),
     });
+
     router.push('/board');
     router.refresh();
   }
@@ -80,6 +85,7 @@ export default function WriteForm() {
       <button
         type="submit"
         className="rounded-[30px] bg-primary py-[5px] text-m text-white"
+        disabled={isUploading}
       >
         글쓰기
       </button>
