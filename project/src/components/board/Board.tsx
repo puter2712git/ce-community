@@ -6,7 +6,7 @@ interface IBoard {
 }
 
 async function getBoardDatas(searchParams: string) {
-  const res = await fetch(`${process.env.COMMUNITY_URL}/api/board`, {
+  const res = await fetch(`${process.env.COMMUNITY_URL}/api/board/${searchParams}`, {
     method: 'GET',
     cache: 'no-store',
   });

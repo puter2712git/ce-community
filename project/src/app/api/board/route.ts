@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
+	console.log(req.nextUrl.searchParams);
+
   const datas = await prisma.post.findMany({
     select: {
       id: true,

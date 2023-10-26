@@ -11,11 +11,21 @@ export default function BoardPage({
 }: {
   searchParams: { [search: string]: string };
 }) {
+	const keys = Object.keys(searchParams);
+	let query = '?';
+
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i];
+		const value = searchParams[key];
+
+		query += `${key}=${value}`
+	}
+
   return (
     <div className="mt-[80px] flex w-full justify-center">
       <div className="w-[90%] max-w-[800px] space-y-3 sm:w-1/2">
         <BoardToolbar />
-        <Board search={searchParams.search} />
+        <Board searchParams={query} />
       </div>
     </div>
   );
