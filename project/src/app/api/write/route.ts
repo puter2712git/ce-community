@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
       like: {
         create: {
           like: 0,
-          dislike: 0,
         },
       },
     },
