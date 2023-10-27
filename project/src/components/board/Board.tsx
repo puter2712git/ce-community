@@ -2,14 +2,19 @@ import { IPost } from '@/lib/post/types';
 import BoardPostRow from './post-row/BoardPostRow';
 
 interface IBoard {
-  searchParams: string;
+  searchParams: Record<string, string>;
 }
 
-async function getBoardDatas(searchParams: string) {
-  const res = await fetch(`${process.env.COMMUNITY_URL}/api/board/${searchParams}`, {
-    method: 'GET',
-    cache: 'no-store',
-  });
+async function getBoardDatas(searchParams: Record<string, string>) {
+  const res = await fetch(
+    `${process.env.COMMUNITY_URL}/api/board?${new URLSearchParams(
+      searchParams,
+    )}`,
+    {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  );
   const datas: IPost[] = await res.json();
 
   return datas;

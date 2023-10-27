@@ -3,7 +3,7 @@ import BoardSearchbar from './BoardSearchbar';
 
 export default function BoardToolbar() {
   return (
-    <section className="flex w-full items-center justify-between">
+    <section className="flex h-auto w-full items-center justify-between">
       <Link
         href="/write"
         className="rounded-[5px] border border-solid border-secondary px-3 py-2 text-m"

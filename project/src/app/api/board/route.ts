@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
-	console.log(req.nextUrl.searchParams);
+  const query = req.nextUrl.searchParams;
+
+  const searchContent = query.has('search') ? query.get('search')! : '';
 
   const datas = await prisma.post.findMany({
     select: {
@@ -19,6 +21,11 @@ export async function GET(req: NextRequest) {
     },
     orderBy: {
       id: 'desc',
+    },
+    where: {
+      content: {
+        contains: searchContent,
+      },
     },
   });
 
