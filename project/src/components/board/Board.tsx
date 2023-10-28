@@ -1,28 +1,13 @@
 import { IPost } from '@/lib/post/types';
 import BoardPostRow from './post-row/BoardPostRow';
+import BoardBody from './board-body/BoardBody';
+import { Suspense } from 'react';
 
 interface IBoard {
-  searchParams: Record<string, string>;
+  searchParams: string;
 }
 
-async function getBoardDatas(searchParams: Record<string, string>) {
-  const res = await fetch(
-    `${process.env.COMMUNITY_URL}/api/board?${new URLSearchParams(
-      searchParams,
-    )}`,
-    {
-      method: 'GET',
-      cache: 'no-store',
-    },
-  );
-  const datas: IPost[] = await res.json();
-
-  return datas;
-}
-
-export default async function Board(props: IBoard) {
-  const boardDatas = await getBoardDatas(props.searchParams);
-
+export default async function Board() {
   return (
     <table className="w-full border border-solid border-primary">
       <thead>
@@ -32,17 +17,9 @@ export default async function Board(props: IBoard) {
           <th className="w-3/12">날짜</th>
         </tr>
       </thead>
-      <tbody>
-        {boardDatas.map((row) => (
-          <BoardPostRow
-            key={row.id}
-            id={row.id}
-            author={row.author}
-            title={row.title}
-            date={row.date}
-          />
-        ))}
-      </tbody>
+	  <Suspense>
+		<BoardBody />
+	  </Suspense>
     </table>
   );
 }
