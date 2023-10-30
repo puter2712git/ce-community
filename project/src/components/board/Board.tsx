@@ -1,7 +1,5 @@
-import { IPost } from '@/lib/post/types';
-import BoardPostRow from './post-row/BoardPostRow';
-import BoardBody from './board-body/BoardBody';
 import { Suspense } from 'react';
+import BoardBody from './board-body/BoardBody';
 
 interface IBoard {
   searchParams: string;
@@ -17,9 +15,9 @@ export default async function Board() {
           <th className="w-3/12">날짜</th>
         </tr>
       </thead>
-	  <Suspense>
-		<BoardBody />
-	  </Suspense>
+      <Suspense>
+        <BoardBody />
+      </Suspense>
     </table>
   );
 }

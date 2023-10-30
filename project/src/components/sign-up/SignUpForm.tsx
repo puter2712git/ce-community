@@ -22,12 +22,8 @@ export default function SignUpForm() {
   const {
     register,
     formState: { errors },
-    watch,
-    reset,
     handleSubmit,
     getValues,
-    setError,
-    setFocus,
   } = useForm<ISignUpForm>({
     mode: 'onBlur',
     defaultValues: {
